@@ -1,0 +1,42 @@
+compilar individualmente
+creando un binario no definitico con "código objeto"
+luego de crear todos los códigos objeto se enlazan
+resolviendo todas las dependencias y generando un único binario final
+si no he cambiado el archivo no necesito volver a generar el .o
+solo debo recompilar el que ha cambiado y luego debo lincar a todos con el nuevo recompilado
+
+
+Si intentamos compilar por separado sin un main nos dará un error de linker:
+"_main", referenced from:
+     implicit entry/start for main executable
+
+
+INCLUDES ENTRE <>
+se supone que hay un path establecido, rutas donde hay ficheros de include
+buscará en las rutas establecidas
+g++ --print-search-dirs
+
+INCLUDES ENTRE ""
+ruta relativa a la posición actual de dónde estamos compilando
+el problema es que si se cambia un archivo de ubicación ya no funcionará
+-I. busca en el directorio actual # se puede colacar muchas rutas
+-l añade al linkado un fichero (externos a nuestro proyecto)
+
+en linux .so son librerías de enlace dinámico equivalente al dll de windows
+ej.
+-lsfml-graphics ( tomará un fichero lib sfml-graphics.so )
+
+
+GCC
+# g++ -o main main.cpp
+g++ -o bin/main.o main.cpp -I
+
+for A in *.cpp; do g++ -c ${A} -I.; done
+
+Modificadores
+-c compila solo
+-I incluye los directorios actuales para los includes <>
+puedo quitar el -o porque es lo que hará por defecto
+
+PERMISOS
+chchmod 755 ./built.sh 
